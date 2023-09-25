@@ -10,6 +10,7 @@ class Hand:
     def __init__(self,
                  cards: list[Card]
                 ):
+        self.__validate_hand(cards)
         self.__cards = cards
         self.count_faces_suits()
         self.__cards_sorted = sorted(self.__cards)
@@ -17,6 +18,13 @@ class Hand:
         self.__create_rules()
         
         return 
+    
+    def __validate_hand(self, 
+                        cards: list[Card]):
+        for i in range(len(cards)):
+            for j in range(i + 1, len(cards)):
+                if cards[i] == cards[j]:
+                    raise ValueError(f'Hand contains two of: {cards[i]}')
     
     def __create_rules(self):
         self.__RULES = {'straight_flush' : self.get_straight_flush,
@@ -266,3 +274,6 @@ class Card:
     
     def __sub__(self, other):
         return self.__face - other.__face
+    
+    def __eq__(self, other):
+        return (self.__face == other.__face) and (self.__suit == other.__suit)
