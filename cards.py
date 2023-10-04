@@ -168,8 +168,7 @@ class Hand:
     def __eq__(self, other):
         rank1, _, output1 = self.get_best_hand()
         rank2, _, output2 = other.get_best_hand()
-        print(rank1, output1)
-        print(rank2, output2)
+        
         if rank1 == rank2:
             out1 = output1[0]
             out2 = output2[0]
